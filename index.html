@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do Website</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      /* Creating a black grid background */
+      background-color: #000;
+      background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.1) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.1) 75%, rgba(255, 255, 255, 0.1) 76%, transparent 77%, transparent),
+                        linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.1) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.1) 75%, rgba(255, 255, 255, 0.1) 76%, transparent 77%, transparent);
+      background-size: 50px 50px;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+    .container {
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 300px;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      color: #fff;
+      font-size: 16px;
+    }
+    .add-task {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+    }
+    input[type="text"] {
+      width: 70%;
+      padding: 5px;
+      border: 2px solid #fff;
+      background-color: transparent;
+      color: #fff;
+      font-size: 16px;
+      outline: none; /* Removes the default focus outline */
+      border-radius: 0; /* Ensures no additional styling causes double border */
+    }
+    button {
+      padding: 5px 10px;
+      border: 2px solid #fff;
+      background-color: transparent;
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+      outline: none; /* Removes the default focus outline */
+    }
+    button:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    input[type="checkbox"] {
+      margin-right: 10px;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #fff;
+      background-color: transparent;
+      position: relative;
+    }
+    input[type="checkbox"]:checked::after {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-size: 14px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      .container {
+        padding: 15px;
+        width: 95%;
+      }
+      .add-task {
+        flex-direction: column;
+        gap: 5px;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 8px;
+      }
+      button {
+        width: 100%;
+        padding: 8px;
+      }
+      li {
+        font-size: 14px;
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>To-Do List</h2>
+    <ul id="taskList">
+      <!-- Tasks will be added here dynamically -->
+    </ul>
+    <div class="add-task">
+      <input type="text" id="taskInput" placeholder="Add a new task">
+      <button onclick="addTask()">Add</button>
+    </div>
+  </div>
+
+  <script>
+    function addTask() {
+      const taskInput = document.getElementById('taskInput');
+      const taskText = taskInput.value.trim();
+      if (taskText !== '') {
+        const li = document.createElement('li');
+        li.innerHTML = `<input type="checkbox"> ${taskText} <button onclick="this.parentElement.remove()">Delete</button>`;
+        document.getElementById('taskList').appendChild(li);
+        taskInput.value = '';
+      }
+      taskInput.focus(); // Automatically focuses the input field after adding a task
+    }
+  </script>
+</body>
+</html>
